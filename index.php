@@ -57,16 +57,19 @@ if (mysqli_num_rows($result) > 0) {
     
           <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="running-movie">
-             <img src=admin/image/<?php echo $row['image']; ?> alt="" class="image-resize2" style="width: 100%;">
-              <div class="top-right">
-                <a data-toggle="modal" data-target="#trailer_modal<?php echo $row['id'];?>"><img src="img/icon/play.png"></a></div>
+            <img src="image/<?php echo $row['image'];?>" alt="Movie Image" class="image-container image-resize2" style="width: 200px height:200px;">
+              <!-- Use an anchor tag with the YouTube video URL -->
+<a href="<?php echo $row['you_tube_link'];?>?autoplay=1" target="_blank">
+  <img src="img/icon/play.png" alt="Play Trailer">
+</a>
+
                 <h5><b><?php echo $row['movie_name'];?></b></h5>
                 <h6><center><?php echo $row['language'];?></center></h6>
                <a href="movie_details.php?pass=<?php echo $row['id'];?>" class="btn btn-primary">Book Now</a>
             </div>
            </div>
            
-           <div class="modal fade" id="tailer_modal<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal fade" id="trailer_modal<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <embed style="width: 820px; height: 450px;" src="<?php echo $row['you_tube_link'];?>"></embed>
@@ -85,32 +88,34 @@ if (mysqli_num_rows($result) > 0) {
 <div class="container">
     <h2>Upcoming Movies</h2>
     <div class="row">
-      <?php
+    <?php
 include("Database.php");
-$result = mysqli_query($conn,"SELECT * FROM add_movie");
+$result = mysqli_query($conn, "SELECT * FROM add_movie");
 
 if (mysqli_num_rows($result) > 0) {
-  while($row = mysqli_fetch_array($result)) {
-      if($row['action']== "upcoming"){
-    ?>
-        <div class="image-box">
-          <div class="col-lg-2 col-md-3 col-sm-6">
-        
-            <div class="card" style="width: 12rem;">
-               <img class="card-img-top image-resize4" src="admin/image/<?php echo $row['image']; ?> " alt="Card image cap">
-
+    while ($row = mysqli_fetch_array($result)) {
+        if ($row['action'] == "upcoming") {
+?>
+           <div class="image-box">
+    <div class="col-lg-2 col-md-3 col-sm-6">
+        <div class="card" style="width: 10rem; height:12rem;">
+            <a href="<?php echo $row['you_tube_link']; ?>" target="_blank" class="card-link">
+                <img class="card-img-top image-resize4" src="admin/image/<?php echo $row['image']; ?>" alt="Card image cap">
                 <div class="card-body">
-                  <h5 class="card-title"><?php echo $row['movie_name'];?></h5>
-                  <p class="card-text">Director: <?php echo $row['director'];?></p>
+                    <h5 class="card-title"><?php echo $row['movie_name']; ?></h5>
+                    <p class="card-text">Director: <?php echo $row['director']; ?></p>
                 </div>
-              </div>
-            </div>
+            </a>
         </div>
+    </div>
+</div>
+
 <?php
-}
-  }
+        }
+    }
 }
 ?>
+
 
 </div>
 </div>

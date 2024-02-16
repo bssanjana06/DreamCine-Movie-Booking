@@ -99,7 +99,7 @@ if (mysqli_num_rows($result) > 0) {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -180,7 +180,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>       
             <div class="col-12">
               <div class="form-group">
-                <label>Set of Time</label>
+                <label>Poster</label>
                 <img src="image/<?php echo $row['image'];?>" width="10%">
                 <input type="file" name="edit_img" id="edit_img" class="form-control">
                 <input type="hidden" name="old_image" value="<?php echo $row['image'];?>" id="old_image" class="form-control">              
@@ -230,19 +230,19 @@ if (mysqli_num_rows($result) > 0) {
         		<div class="col-12">
         			<div class="form-group">
 		        		<label>Movie Name</label>
-		        		<input class="form-control" name="movie_name" id="movie_name" placeholder="movie name">
+		        		<input class="form-control" name="movie_name" id="movie_name" placeholder=" Enter movie name">
 		        	</div>
         		</div>
             <div class="col-12">
               <div class="form-group">
                 <label>Director Name</label>
-                <input class="form-control" name="director_name" id="director_name" placeholder="Director name">
+                <input class="form-control" name="director_name" id="director_name" placeholder=" Enter director name">
               </div>
             </div>
             <div class="col-12">
               <div class="form-group">
                 <label>Release Date</label>
-                <input class="form-control" name="release_date" id="release_date" placeholder="Director name">
+                <input class="form-control" name="release_date" id="release_date" placeholder="Enter Release Date">
               </div>
             </div>
       

@@ -47,7 +47,7 @@ include("database_connection.php");
             <div class="col-md-3">                				
 				
 				<div class="list-group">
-					<h3>category</h3>
+					<h3>Category</h3>
                     <?php
 
                     $query = "
