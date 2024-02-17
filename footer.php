@@ -1,17 +1,17 @@
  <!-- Footer Section Begin -->
-    <footer class="footer">
+ <footer class="footer" style="padding-top: 20px; padding-bottom: 10px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="img/logo.png" alt=""></a>
+                            <a href="#"><img src="img/logo1.png" alt=""></a>
                         </div>
-                        <p>The customer is at the heart of our unique business model, which include online movie book show.</p>
-                        <a href="#"><img src="img/payment.png" alt=""></a>
+                        <p style="text-align: justify;">The customer is at the heart of our unique business model, which includes online movie bookings.</p>
+                        <img src="img/payment.png" alt="">
                     </div>
                 </div>
-                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6" style="margin-left:50px;">
                     <div class="footer__widget">
                         <h6>Menu</h6>
                         <ul>
@@ -23,7 +23,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="col-lg-2 col-md-3 col-sm-6" style="margin-right:0px;">
                     <div class="footer__widget">
                         <h6>Category</h6>
                         <ul>
@@ -36,25 +36,21 @@
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-                    <div class="footer__widget">
+                    <div class="footer__widget" style="margin-right:-85px;">
                         <h6>LOCATION</h6>
                         <div class="footer__newslatter">
-                            <p>Inox Cinema, Near Upashna Circle, 
-                                Wadhwan,Surendranagar-363020,
-                               
-</p>
-                            
+                    <p>DreamCine, 789 Cinema Avenue, Block B,<br> Mysuru 570001.<br>Karnataka, India</p>                                               
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <div class="footer__copyright__text">
+                    <div class="footer__copyright__text" style="margin-top:5px;">
                         <p>Copyright ©
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script>-2020 
+                            </script> 
                         </p>
                     </div>
                 </div>

@@ -442,11 +442,12 @@ ol {
 
 .header__menu ul li a {
 	font-size: 18px;
-	color: #111111;
+	color: white;
 	display: block;
-	font-weight: 600;
+	font-weight: 400;
 	position: relative;
-	padding: 3px 0;
+	padding: 3px 3px;
+	margin-top: 5px;
 }
 
 .header__menu ul li a:after {
