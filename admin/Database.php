@@ -1,7 +1,7 @@
 <?php
 $servername='localhost';
 $username='root';
-$password='';
+$password='1234';
 $dbname = "moviebook";
 $conn=mysqli_connect($servername,$username,$password,"$dbname");
 if(!$conn){
