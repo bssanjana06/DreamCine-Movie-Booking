@@ -30,6 +30,31 @@ session_start();
     <link rel="stylesheet" href="css/slicknav.min.css" type="  text/css">
     <link rel="stylesheet" href="css/fonts-googleapis.css" type="  text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">   
+
+    <style>
+    .timings-box {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+        text-align: center;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .timings-box a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .timings-box:hover {
+        background-color: #e0e0e0;
+    }
+</style>
+
     
 </head>
 <body>
@@ -50,7 +75,7 @@ include("header.php");
             $id = $row['id'];
         ?>
     <div class="row feature design">
-        <div class="col-lg-5"> <img src="admin/image/<?php echo $row['image']; ?>" class="resize-detail" alt="" width="100%"> </div>
+        <div class="col-lg-5"> <img src="admin/image/<?php echo $row['image']; ?>" class="resize-detail" style="width:100%; height:500px;" alt=""> </div>
 
       <div class="col-lg-7" style="margin-left:550px; margin-top:-500px;">
         
@@ -78,60 +103,77 @@ include("header.php");
           </tr>
          
           <tr>
-            <td>Trailer</td><td><a data-toggle="modal" data-target="#trailer_modal<?php echo $row['id'];?>">View Trailer</a></td>
-            <div class="modal fade" id="trailer_modal<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <embed style="width: 820px; height: 450px;" src="<?php echo $row['you_tube_link'];?>"></embed>
-    </div>
-  </div>
-</div> 
-          </tr>
+    <td>Trailer</td>
+    <td>
+        <a href="<?php echo $row['you_tube_link']; ?>?autoplay=1" target="_blank">View Trailer</a>
+    </td>
+</tr>
+
           
           </tbody>
             
           
         </table>
-        <?php  if($row['action']== "running"){?>
-        <div class="time-link">
-          <h4>Show Book Ticket:</h4><br>
-          <?php 
-            $time = $row['show'];
+        <h3 style="font-size:20px; margin-bottom:5px;">Show Timings</h3>
+        <?php 
+$time = $row['show'];
+$movie = $row['movie_name'];
+$set_time = explode(",", $time);
 
-            $movie = $row['movie_name'];
-            $set_time = explode(",", $time);
-            $res = mysqli_query($conn,"SELECT * FROM theater_show");
+$res = mysqli_query($conn, "SELECT * FROM theater_show");
 
-        if (mysqli_num_rows($res) > 0) {
-          while($row = mysqli_fetch_array($res)) {
-
-            if(in_array($row['show'],$set_time)){
-
-              ?><a href="seatbooking.php?movie=<?php echo $movie; ?>&time=<?php echo $row['show'];?>"><?php echo $row['show'];?></a><?php
-             
-             }
-           }
-         }
-          ?>
-        
-       
-      </div>
-      <?php
-}
-      ?>
-      </div>
-      
-    </div>
-    <div class="description">
-      <h4>Description</h4>
-      <p>
-        Jeff Lang (Tobey Maguire), an OBGYN, and his wife Nealy (Elizabeth Banks), who owns a small shop, live in Seattle with their two-year-old son named Miles. Considering a second child, they decide to enlarge their small home and lay expensive new grass in their backyard. Worms in the grass attract raccoons, who destroy the grass, and Jeff goes to great lengths to get rid of the raccoons, mixing poison with a can of tuna. Their neighbor Lila (Laura Linney) tells Jeff that her cat Matthew is missing, and Jeff does not yet realize he may be responsible.
-      </p>
-    </div>
-    <?php
+if (mysqli_num_rows($res) > 0) {
+    while ($row = mysqli_fetch_array($res)) {
+        if (in_array($row['show'], $set_time)) {
+            ?>
+            <div class="timings-box">
+                <a href="seatbooking.php?movie=<?php echo $movie; ?>&time=<?php echo $row['show']; ?>">
+                    <?php echo $row['show']; ?>
+                </a>
+            </div>
+            <?php
         }
-      }
-         ?>
+    }
+}
+          }
+        }
+?>
+</div>
+</div>
+    <div class="description">
+      <h4 style="font-size:25px;">Description</h4>
+      <?php
+include("database_connection.php");
+
+// Assuming you have the movie ID in the URL parameter
+if (isset($_GET['pass']) && !empty($_GET['pass'])) {
+    $movieId = $_GET['pass'];
+
+    // Fetch movie details from the database
+    $query = "SELECT description FROM add_movie WHERE id = :movie_id";
+    $statement = $connect->prepare($query);
+    $statement->bindParam(':movie_id', $movieId, PDO::PARAM_INT);
+    $statement->execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    // Check if the movie details were found
+    if ($result) {
+        $description = $result['description'];
+
+        // Display the description
+        echo '<div style="font-size: 20px; text-align:justify;font-style:italic;">' . $description . '</div>';
+
+    } else {
+        // Movie not found
+        echo "Movie not found.";
+    }
+} else {
+    // Invalid or missing movie ID
+    echo "Invalid or missing movie ID.";
+}
+?>
+
+    </div>
     </div>
   
 </section>
