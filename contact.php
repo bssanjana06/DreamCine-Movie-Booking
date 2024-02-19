@@ -43,15 +43,17 @@ session_start();
                 <div class="col-lg-6 col-md-6">
                     <div class="contact__text">
                         <div class="section-title">
-                            <span>Information</span>
-                            <h2>Contact Us</h2>
-                            <p>As you might expect of a company that began as a high-end interiors contractor, we pay
-                                strict attention.</p>
+                            <h2 style="margin-top:0px;">Contact Us</h2>
+                            <p style="text-align: justify;">
+    For any inquiries, feedback, or collaboration opportunities, feel free to reach out to us through our dedicated contact page.
+    Your thoughts matter to us! Use our contact page to get in touch for assistance, questions, or to share your experiences with our team.
+</p>
+
                         </div>
                         <ul>
                             <li>
-                                <h4>Surendranagar</h4>
-                                <p>Inox Cinema, Near Upashna Circle, Surendranagar.  <br />+91 187-654-3210
+                                <h4>DreamCine</h4>
+                                <p>789 Cinema Avenue, Block B<br>Mysuru 570001<br>Karnataka, India  <br />+91 187-654-3210
                                     <br />+91 258-963-1470</p>
                             </li>
                         

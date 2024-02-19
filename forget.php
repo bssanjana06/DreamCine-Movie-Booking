@@ -11,13 +11,22 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($conn, $sql_query);
     $row = mysqli_fetch_array($result);
 
-    if ($row) {
-        $id = $row['id'];
-        $update_record = mysqli_query($conn, "UPDATE `user` SET `password` = '$newpassword' WHERE `id` = '$id'");
-        header("Location: login.php");
+    if (!$row) {
+        echo "<p><font color='red'>Email is not registered.</font></p>";
         exit();
+    }
+
+    if ($newpassword != $cpassword) {
+        echo "<p><font color='red'>New password and confirm password do not match. Please try again.</font></p>";
+        exit();
+    }
+    $id = $row['id'];
+    $update_record = mysqli_query($conn, "UPDATE `user` SET `password` = '$newpassword' WHERE `id` = '$id'");
+
+    if ($update_record) {
+        echo "<p><font color='white'>Password updated successfully.<br><a href='login.php'>Login</a> with your new password.</font></p>";
     } else {
-        echo "<p>Invalid credentials. Please check your details and try again.</p>";
+        echo "<p><font color='red'>Error updating password. Please try again.</font></p>";
     }
 }
 ?>
