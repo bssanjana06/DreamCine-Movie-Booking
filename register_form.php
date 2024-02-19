@@ -9,11 +9,49 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
-<body>
+
+     <style>
+  .container {
+    background-color: #333; 
+    max-width: 600px; 
+    margin: auto; 
+    padding: 20px; 
+    border-radius: 10px; 
+  }
+ 
+  .user-details,
+  .button {
+    margin-top: 20px;
+  }
+
+  input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  body{
+    color:white;
+  }
+  .details{
+    height:20px;
+  }
+  .input-box input[type="text"],
+    .input-box input[type="password"] {
+        color: black;  /* Change text color to black */
+    }
+
+
+</style>
+
+ </head>
+
+<body style="background-color:#222;">
 
   <div class="container">
-    <center><a href="./index.html"><img src="img/logo.png" alt="" style="margin-top: 80px; width: 50%;"></a></center>
+    <center><a href="index.php"><img src="img/logo1.png" alt="" style="margin-top: 10px; width: 50%; margin-bottom:20px;"></a></center>
     <div class="title">Registration</div>
     <div class="content">
       <form id="form" action="register.php" method="post" enctype="multipart/form-data" onsubmit="return validate();">
@@ -58,6 +96,15 @@
         <div class="button">
           <input type="submit" value="Register" id="submit" name="submit">
         </div>
+        <?php
+session_start();
+
+// Display register message
+if (isset($_SESSION['register_message'])) {
+    echo $_SESSION['register_message'];
+    unset($_SESSION['register_message']); // Clear the message after displaying
+}
+?>
       </form>
     </div>
   </div>
@@ -80,7 +127,7 @@
  }
  if(name.value.length <= 2) 
 {
-   error = " <font color='red'>!Not more than 20 characters</font> ";
+   error = " <font color='red'>!Should be more than 3 characters</font> ";
  
   document.getElementById( "nameerror" ).innerHTML = error;
   return false;
@@ -108,14 +155,14 @@ if(!isNaN(name.value))
  }
  else if( email.value.indexOf('@')<=0)
  {
-  error = " <font color='red'>! ** @ invalid position</font> ";
+  error = " <font color='red'>! *@ required</font> ";
   document.getElementById( "emailerror" ).innerHTML = error;
   return false;
  }
 
  else if ((email.value.charAt(email.value.length-4)!='.') && (email.value.charAt(email.value.length-3)!='.'))
  {
-  error = " <font color='red'>! ** . invalid position</font> ";
+  error = " <font color='red'>! *Invalid Email</font> ";
   document.getElementById( "emailerror" ).innerHTML = error;
   return false;
  }
@@ -127,19 +174,19 @@ if(!isNaN(name.value))
 
  else if( number.value == "")
  {
-  error = " <font color='red'>!Name required.</font> ";
+  error = " <font color='red'>!Phone No required.</font> ";
   document.getElementById( "numbererror" ).innerHTML = error;
   return false;
  }
 else if( number.value.length!=10)
  {
-  error = " <font color='red'>! ** Mobile number must be 10 digits</font> ";
+  error = " <font color='red'>*Phone No must be 10 digits.</font> ";
   document.getElementById( "numbererror" ).innerHTML = error;
   return false;
  }
 
 else if(isNaN(number.value)){
-  error = " <font color='red'>! ** No characters allowed in Mobile number</font> ";
+  error = " <font color='red'>*No characters allowed.</font> ";
   document.getElementById( "numbererror" ).innerHTML = error;
   return false;
 }
@@ -149,7 +196,7 @@ else if(isNaN(number.value)){
 
  else if( city.value == "" )
  {
-  error = " <font color='red'>!Name required.</font> ";
+  error = " <font color='red'>!City required.</font> ";
   document.getElementById( "cityerror" ).innerHTML = error;
   return false;
  }
@@ -181,7 +228,7 @@ else if(isNaN(number.value)){
 
 else if( cpassword.value == "" )
  {
-  error = " <font color='red'>!Name required.</font> ";
+  error = " <font color='red'>!Password required.</font> ";
   document.getElementById( "cpassworderror" ).innerHTML = error;
   return false;
  }

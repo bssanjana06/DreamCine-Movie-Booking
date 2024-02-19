@@ -25,19 +25,19 @@ if (isset($_POST['login'])) {
                 header("Location: index.php");
                 exit();
             } else {
-                $response = "Invalid Username or password. Please check your credentials and try again.  <a href='login_form.php'>GO BACK</a>";
+                $response =" <font color='red'>*Invalid Username or Password.</font> ";
+                $_SESSION['login_message'] = $response;
+                header("Location: login_form.php");
+                exit();
             }
 
             mysqli_stmt_close($stmt);
         } else {
             $response = "Failed to prepare the SQL statement.";
+            $_SESSION['login_message'] = $response;
+            header("Location: login_form.php");
+            exit();
         }
-    }
-
-    // If there are errors, echo the user-friendly message
-    if (!empty($response)) {
-        echo $response;
-        exit();
     }
 }
 

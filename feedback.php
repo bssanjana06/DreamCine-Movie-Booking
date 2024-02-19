@@ -42,7 +42,8 @@ include("header.php");
             <div class="col-md-10">
                 <div class="row align-items-center">
                     <div class="col-lg-7 mb-5 mb-lg-0">
-                        <h2 class="mb-5">Fill the form. <br> It's easy.</h2>
+                    <h2 class="mb-5" style="font-size: 40px;">Help us improve!</h2>
+                      <p style="font-size: 20px; margin-top:-30px; margin-bottom:50px; font-weight:bold;">Your feedback matters</p>
                         <form action="feedback_action.php" method="post" onsubmit="return feedbackvalidate();">
                             <div class="row">
                                 <div class="col-md-6 form-group">
@@ -70,13 +71,13 @@ include("header.php");
                                     </div>
                                 </div>
                                 <div class="modal fade" id="trailer_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <h3>You need to login</h3>
-                                            <a class="btn btn-primary btn-sm" href="login_form.php">Login</a>
-                                        </div>
-                                    </div>
-                                </div>
+        <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #222; color: white; border-radius: 10px; padding: 5px; font-size: small;">
+            <h3 style="color: white; font-size:medium; text-align:center;margin-top:5px;">You need to login</h3>
+            <a class="btn btn-primary btn-sm" href="login_form.php" style="background-color: #6f42c1; color: white;">Login</a>
+        </div>
+        </div>
+         </div>
                             <?php } else { ?>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -87,8 +88,8 @@ include("header.php");
                         </form>
                     </div>
                     <div class="col-lg-4 ml-auto">
-                        <h3 class="mb-4">Let's talk about everything.</h3>
-                        <p>Do let us know your thoughts and suggestions on how can we know you better. Feel free to give feedback on how you feel about our service.</p>
+                        <h3 class="mb-4" style="margin-top:30px;">Let's talk about everything.</h3>
+                        <p style="text-align:justify; font-size:16px;">"We appreciate your feedback. Easily submit feedback using our hassle-free form. Take a moment to fill out our simple form and let us know how we're doing."</p>
                     </div>
                 </div>
             </div>

@@ -37,24 +37,18 @@ include("header.php");
   <div class="container">
     <div class="heading text-left"> 
       <!-- Heading -->
-      <div>
-      	<h2><u>About Us</u></h2>
-      </div>
-      <div class="wel_line"><center><h3>WELCOME TO INOX THEATER  </h3></center></div>
+      <div class="wel_line"><center><h3 style="margin-top:-10px;">WELCOME TO DREAMCINE </h3></center></div>
     </div>
     <div class="row feature design">
 
       <div class="area1 columns left">
         
-        <h5>INOX Theater is the most recognisable ﬁlm exhibition brands in the country which has high standards of ‘Luxury’, ‘Service’ & ‘Technology’.</h5>
-        <p>Currently with a Cinema circuit of 450 + screens spread across 100+ properties covering 100+ cities across the country.
-        The best thing about using it is the simplicity and ease with which a person can book the tickets online.Coming from Chennai, that has a rich legacy of cinema, we are a theatre chain with a passion for experiences and an even bigger passion to share them with our customers. We understand the joy of watching our favourite stories come alive on the big screen, and believe that it is our duty to go the extra mile to make this experience as immersive as we possibly can!
-        The company was instrumental in bringing computer-based digital non-linear editing to India with Avid Technology, transforming the industry and forever changing the way Indian film and television programs were edited. The company subsequently brought digital cinema sound to India with DTS and helped Indian cinema leapfrog a generation, form mono sound directly to digital.
-        <br>
-    It is available for 24 X 7 hours.  </p> 
+        <h5 style="font-weight:bold; margin-top:70px;font-style:italic;">"DreamCine:  Elevating Cinematic Excellence with Unmatched Luxury, Impeccable Service, and Cutting-Edge Technology."</h5>
+        <p style="margin-top:50px;">DreamCine is a renowned theater that has carved its niche in the entertainment industry, providing an immersive and captivating cinematic experience for movie enthusiasts. Located in a prime location, DreamCine stands out with its state-of-the-art facilities, plush interiors, and cutting-edge technology, making it a go-to destination for cinephiles.The theater boasts multiple screens equipped with the latest in audio-visual technology, offering crystal-clear visuals and immersive sound quality. From mainstream blockbusters to indie gems, DreamCine caters to a diverse audience by showcasing a wide range of films across various genres.It stands as a beacon of cinematic excellence, blending cutting-edge technology with comfort and community engagement to deliver a memorable and enchanting movie experience for all its patrons.
+        <br>It is available for 24 X 7 hours.  </p> 
 
       </div>
-      <div class="area2 columns feature-media left"> <img src="image/Online-Movie-Ticket-Booking-Banner-1-1280x720.jpg" alt="" width="100%"> </div>
+      <div class="area2 columns feature-media left"> <img src="image/about.png" alt="" style="margin-top:70px;"> </div>
     </div>
   
     </div>
@@ -63,8 +57,7 @@ include("header.php");
 <div class="dvCapacity">
 
                                     <div class="CapacityHead">
-                                        SERVING HAPPINESS
-                       
+                                        SERVING HAPPINESS                       
                        
                                     </div>
                                     <div class="CapHorizon">
@@ -72,12 +65,10 @@ include("header.php");
                                     <div class="PatronStruc">
                                         <div class="row">
 
-
-
                                             <div class="col-md-4">
 
                                                 <div class="dvPatron">
-                                                    <img src="image/unnamed.jpg" class="resize" alt="#" />
+                                                    <img src="image/luxury.jpg" class="resize" alt="#" />
 
                                                 </div>
 
@@ -88,64 +79,56 @@ include("header.php");
 
                                                         </div>
                                                         <div class="dvPatronDescText">
-                                                           Inox theater is a leading chain of multiplex spread over Gujarat.The multiplex shows Hindi and English movies. It caters best in class cinematic experience to its patrons.
+                                                        Where luxury meets entertainment. Plush seating, top-notch amenities, and a commitment to opulence redefine your cinematic experience. Indulge in the magic of the silver screen with us.
                                                         </div>
                                                     </div>
                                                 </div>
 
                                             </div>
-                                            <div class="col-md-4">
+                    
+                                            
+                    <div class="col-md-4">
+                    <div class="dvPatron">
+                   <img src="image/service.jpg" class="resize" alt="#" />
+                  </div>
+
+              <div class="dvPatConetnt">
+               <div class="dvPatronDesc">
+                 <div class="dvPatronDescHead">Service</div>
+        <div class="dvPatronDescText">
+        Where luxury meets entertainment. Plush seating, top-notch amenities, and a commitment to opulence redefine your cinematic experience. Indulge in the magic of the silver screen with us.
+        </div>
+             </div>
+          </div>
+              </div>
+
+                                                 <div class="col-md-4">
 
                                                 <div class="dvPatron">
-                                                    <img src="image/food_epicurious1-1-1d876222fa3d4f92.jpg" alt="#" />
+                                                    <img src="image/technology.jpeg" class="resize" alt="#" />
 
                                                 </div>
-                                                <div class="dvPatConetnt">
-                                                    <div class="dvPatronDesc">
-                                                        <div class="dvPatronDescHead">
-                                                            Service
-                                                        </div>
-                                                        <div class="dvPatronDescText">
-                                                            Weekend popcorn,cold drinks,snacks and 'masala' on screen.We are committed to provide our guests with an unparalleled cinema journey, which is underlined by the warmth of our top notch service 
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                            </div>
-
-                                            <div class="col-md-4">
-
-                                                <div class="dvPatron">
-                                                    <img src="image/capacity-technology.jpg" class="resize" alt="#" />
-
-                                                </div>
                                                 <div class="dvPatConetnt">
                                                     <div class="dvPatronDesc">
                                                         <div class="dvPatronDescHead">
                                                             Technology
+
                                                         </div>
                                                         <div class="dvPatronDescText">
-                                                            Be it projection &
- sound or our advanced cinema formats or reservations, check-ins & food ordering, we aim to amplify your experience with the finest use of technology
-
-
+                                                        Where luxury meets entertainment. Plush seating, top-notch amenities, and a commitment to opulence redefine your cinematic experience. Indulge in the magic of the silver screen with us.
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
+                                           
+                                            
 <?php
 include("footer.php");
 ?>
 
 
-    <!-- Js Plugins -->
+    <!-- Js Plugins
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>
@@ -155,6 +138,6 @@ include("footer.php");
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js"></script> -->
 </body>
 </html>     

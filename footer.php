@@ -1,4 +1,27 @@
  <!-- Footer Section Begin -->
+ <style>
+    .footer {
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+    .footer__about {
+        margin-bottom: 20px;
+    }
+
+    .footer__widget {
+        margin-bottom: 20px;
+    }
+
+    .footer__newslatter {
+        margin-top: 10px;
+    }
+
+    .footer__copyright__text {
+        margin-top: 5px;
+    }
+</style>
+
  <footer class="footer" style="padding-top: 20px; padding-bottom: 10px;">
         <div class="container">
             <div class="row">
