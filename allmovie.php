@@ -33,26 +33,30 @@ include("database_connection.php");
     <link rel="stylesheet" href="css/slicknav.min.css" type="  text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">    
 
+    <style>
+        .list-group{
+            color:black;
+        }
+    </style>
+
 </head>
 
-<body>
+<body style="background-color:#222; color:white;">
 
     <?php 
     include("header.php");
     ?>
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" style="width:100%;">
         <div class="row">
         	
             <div class="col-md-3">                				
 				
 				<div class="list-group">
-					<h3>Category</h3>
+					<h3 style="margin-top:40px; margin-bottom:20px; font-style:italic; color:white;">Category</h3>
                     <?php
 
-                    $query = "
-                    SELECT DISTINCT(category) FROM add_movie WHERE status = '1' ORDER BY category DESC
-                    ";
+     $query = "SELECT DISTINCT category FROM add_movie WHERE status = '1' ORDER BY category DESC";
                     $statement = $connect->prepare($query);
                     $statement->execute();
                     $result = $statement->fetchAll();
@@ -69,11 +73,9 @@ include("database_connection.php");
                 </div>
 				
 				<div class="list-group">
-					<h3> language</h3>
+                <h3 style="margin-top:40px; margin-bottom:20px; font-style:italic; color:white;">Language</h3>
 					<?php
-                    $query = "
-                    SELECT DISTINCT(language) FROM add_movie WHERE status = '1' ORDER BY language DESC
-                    ";
+    $query = "SELECT DISTINCT(language) FROM add_movie WHERE status = '1' ORDER BY language DESC";
                     $statement = $connect->prepare($query);
                     $statement->execute();
                     $result = $statement->fetchAll();
@@ -129,13 +131,13 @@ $(document).ready(function(){
     {
         $('.filter_data').html('<div id="loading" style="" ></div>');
         var action = 'fetch_data';
-        var directoer = get_filter('directrr');
+        var director = get_filter('director');
         var category = get_filter('category');
         var language = get_filter('language');
         $.ajax({
             url:"allmovie_fetch.php",
             method:"POST",
-            data:{action:action, directer:director, category:category, language:language},
+            data:{action:action, director:director, category:category, language:language},
             success:function(data){
                 $('.filter_data').html(data);
             }

@@ -49,12 +49,12 @@
                 <div class="col-lg-2 col-md-3 col-sm-6" style="margin-right:0px;">
                     <div class="footer__widget">
                         <h6>Category</h6>
-                        <ul>
-                            <li><a href="allmovie.php">Action</a></li>
-                            <li><a href="allmovie.php">Drama</a></li>
-                            <li><a href="allmovie.php">Comedy</a></li>
-                            <li><a href="allmovie.php">History</a></li>
-                            <li><a href="allmovie.php">Horror</a></li>
+                        <ul style="color:#d3cbcb; font-size:15px;">
+                            <li>Action</a></li>
+                            <li>Drama</a></li>
+                            <li>Comedy</a></li>
+                            <li>History</a></li>
+                            <li>Horror</a></li>
                         </ul>
                     </div>
                 </div>

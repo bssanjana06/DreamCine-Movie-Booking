@@ -17,7 +17,7 @@ session_start();
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php echo $row['movie_name'];?> Movie Deatis</title>
+    <title><?php echo $row['movie_name'];?> Movie Details</title>
 
 
 
@@ -51,7 +51,8 @@ include("header.php");
         ?>
     <div class="row feature design">
         <div class="col-lg-5"> <img src="admin/image/<?php echo $row['image']; ?>" class="resize-detail" alt="" width="100%"> </div>
-      <div class="col-lg-7">
+
+      <div class="col-lg-7" style="margin-left:550px; margin-top:-500px;">
         
         <table class="content-table">
           <thead><tr>
@@ -77,7 +78,7 @@ include("header.php");
           </tr>
          
           <tr>
-            <td>Trailer</td><td><a data-toggle="modal" data-target="#trailer_modal<?php echo $row['id'];?>">Veiw Trailer</a></td>
+            <td>Trailer</td><td><a data-toggle="modal" data-target="#trailer_modal<?php echo $row['id'];?>">View Trailer</a></td>
             <div class="modal fade" id="trailer_modal<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -92,7 +93,7 @@ include("header.php");
           
         </table>
         <?php  if($row['action']== "running"){?>
-        <div class="tiem-link">
+        <div class="time-link">
           <h4>Show Book Ticket:</h4><br>
           <?php 
             $time = $row['show'];
