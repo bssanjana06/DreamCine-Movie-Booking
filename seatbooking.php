@@ -58,11 +58,65 @@
 
         
         </script>
+        <style>
+        body {
+            font-family: Shruti;
+            background-color: #f0f0f0; /* Add a background color */
+            /* padding: 20px; */
+        }
+
+  /* seatCharts-container{
+    width:100%;
+  } */
+        col-lg-7 col-md-7 col-sm-5{
+            color:black;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            
+        }
+
+        th, td {
+            border: 2px solid #ddd; /* Add a border */
+            padding: 5px;
+            text-align: left;
+            color: #333;
+        }
+        .line{
+            color:black;
+        }
+
+        th {
+            background-color: #0892d0;
+            font-style: italic;
+        }
+
+        td:nth-child(odd) {
+            background-color: #ECF68C;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+
+        input[type="hidden"] {
+            display: none;
+        }
+    </style>
+
+        
 </head>
-    <div>
-    <div class="seat_heading">
-<h3><center>BOOK YOUR SEAT NOW</center></h3>
+<body style="background-color:black; color:white;">
+             <div style="display: flex; justify-content: center; align-items: center;">
+    <div class="seat_heading" style="text-align:center;">
+        <h3 style="color:white; text-align:center;">BOOK YOUR SEAT NOW</h3>
+    </div>
 </div>
+
    <?php
         include("Database.php");
             $time = $_GET['time'];
@@ -84,21 +138,17 @@
     <?php if(isset($_POST['submit'])){
                     $seats= $_POST['t1'];
                     $seats1 = explode(",", $seats);
-                 ?>       
-    <div class="row">
-        <div class="col-lg-6">
+                 ?>      
+                 
+  <class="col-lg-6" style="width: 100%; background-color: #222; padding: 5px; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
     <div class="seatCharts-container">
-     
-                
-      
-        <div class="front">SCREEN</div>
-         <center><p id="notvalid" style="color: red; font-size: 20px;"></p></center>
-        <div class="seat_type">Silver : 100</div>
+        <div class="front" style="margin-bottom: 10px;">SCREEN</div>
+        <center><p id="notvalid" style="color: red; font-size: 20px;"></p></center>
+        <div class="seat_type" style="color: white; margin-bottom: 5px;">Silver : 100</div>
         <div id="validated"></div>
-      <div class="row">
+        <div class="row">
             <div class="col-lg-7 col-md-7 col-sm-5">
-                
-                <table>
+                <table style="height:131px;">
                     <tr>
                         <td class="line" style="width: 10%;">I</td> 
                         <td><input type="checkbox" class="larger" name="seat[]" value="I1" <?php
@@ -200,12 +250,10 @@
                     </tr>
                 </table>
             </div>
-            
             <div class="col-lg-5 col-md-5 col-sm-7">
-                <div class="seattable" id="silver">
-                <table>
-                    <tr>
-                        <td class="line" style="width: 10%;color:white;">I</td>
+                <div class="seattable" id="gold">
+                <table style="height:100px;">
+                    <tr><td class="line" style="width: 10%;">I</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="I7" <?php
                          if(in_array("I7",$seats1)){
                                     echo "disabled";
@@ -237,14 +285,13 @@
                                 }
                     ?>></td>
                     </tr>
-                    <tr>
-                        <td class="line" style="width: 10%;color:white;">H</td>
+                    <tr><td class="line" style="width: 10%; font-size:22px;">H</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="H7" <?php
                          if(in_array("H7",$seats1)){
                                     echo "disabled";
                                 }
                     ?>></td>
-                        <td><input type="checkbox" class="larger" name="seat[]" value="H8"<?php
+                        <td><input type="checkbox" class="larger" name="seat[]" value="H8" <?php
                          if(in_array("H8",$seats1)){
                                     echo "disabled";
                                 }
@@ -270,8 +317,7 @@
                                 }
                     ?>></td>
                     </tr>
-                    <tr>
-                        <td class="line" style="width: 10%;color:white;">G</td>
+                    <tr><td class="line" style="width: 10%;">G</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="G7" <?php
                          if(in_array("G7",$seats1)){
                                     echo "disabled";
@@ -303,16 +349,15 @@
                                 }
                     ?>></td>
                     </tr>
-
                 </table>
             </div>
         </div>
     </div>
-         <div class="seat_type">Gold : 150</div>
+    <div class="seat_type" style="color:white; margin-bottom:5px; margin-top:15px;">Gold : 150</div>
 
       <div class="row">
             <div class="col-lg-7 col-md-7 col-sm-5">
-                <table>
+                <table style="height:215px;">
                     <tr>
                         <td class="line" style="width: 10%;">F</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="F1" <?php
@@ -484,7 +529,7 @@
             <div class="col-lg-5 col-md-5 col-sm-7">
                 <div class="seattable" id="gold">
                 <table>
-                    <tr><td class="line" style="width: 10%;color:white;">F</td>
+                    <tr><td class="line" style="width: 10%;">F</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="F7" <?php
                          if(in_array("F7",$seats1)){
                                     echo "disabled";
@@ -516,7 +561,7 @@
                                 }
                     ?>></td>
                     </tr>
-                    <tr><td class="line" style="width: 10%;color:white;">
+                    <tr><td class="line" style="width: 10%; font-size:22px;">E</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="E7" <?php
                          if(in_array("E7",$seats1)){
                                     echo "disabled";
@@ -548,7 +593,7 @@
                                 }
                     ?>></td>
                     </tr>
-                    <tr><td class="line" style="width: 10%;color:white;">D</td>
+                    <tr><td class="line" style="width: 10%;">D</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="D7" <?php
                          if(in_array("D7",$seats1)){
                                     echo "disabled";
@@ -581,7 +626,7 @@
                     ?>></td>
                     </tr>
                     <tr>
-                        <td class="line" style="width: 10%;color:white;">C</td>
+                        <td class="line" style="width: 10%;">C</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="C7" <?php
                          if(in_array("C7",$seats1)){
                                     echo "disabled";
@@ -614,7 +659,7 @@
                     ?>></td>
                     </tr>
                     <tr>
-                        <td class="line" style="width: 10%;color:white;">B</td>
+                        <td class="line" style="width: 10%;">B</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="B7" <?php
                          if(in_array("B7",$seats1)){
                                     echo "disabled";
@@ -651,7 +696,7 @@
         </div>
     </div>
     
-         <div class="seat_type">Platimun : 300</div>
+    <div class="seat_type" style="color:white; margin-bottom:5px; margin-top:15px;">Platinum : 300</div>
 
       <div class="row">
             <div class="col-lg-7 col-md-7 col-sm-5">
@@ -697,7 +742,7 @@
             <div class="col-lg-5 col-md-5 col-sm-7">
                 <div class="seattable">
                 <table>
-                    <tr><td class="line" style="width: 10%;color:white;">A</td>
+                    <tr><td class="line" style="width: 10%;">A</td>
                         <td><input type="checkbox" class="larger" name="seat[]" value="A7" <?php
                          if(in_array("A7",$seats1)){
                                     echo "disabled";
@@ -739,48 +784,53 @@
 
     </div>
 </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6" style="margin-left:300px;">
        
-        <table>
-            <tr><td width="50%"><font color="blue" size="5px" style="font-family: Shruti;">Movie:</font></td>
-                <td bgcolor="79F9E2"><center><font size=5 style="font-family: Shruti; "><?php echo $_GET['movie'];?></font></center></td>
-            </tr>
-            <tr><td width="50%"><font color="blue" size="5px" style="font-family: Shruti;">Time:</font></td>
-                <td bgcolor="ECF68C"><center><font size=5 style="font-family: Shruti;"><?php echo $_GET['time'];?></font></center></td>
-            </tr>
-            <tr><td width="50%"><font color="blue" size="5px" style="font-family: Shruti;">Seat:</font></td>
-                <td> <input type="text" id="selectedtext" name="seats" placeholder="selected checkboxs"></td>
-            </tr>
-            <tr><td width="50%"><font color="blue" size="5px"style="font-family: Shruti;">Total Seat:</font></td>
-               <td> <input type="text" id="count" name="totalseat" placeholder="Total Seats"></td>
-            </tr>  
-            <input type="hidden" name="movie" value="<?php echo $_GET['movie'];?>">
-            <input type="hidden" name="show" value="<?php echo $_GET['time'];?>">
-</table>
+    <table>
+        <tr>
+            <th>Movie:</th>
+            <td style="color:white;"><?php echo $_GET['movie'];?></td>
+        </tr>
+        <tr>
+            <th>Time:</th>
+            <td style="color:white;"><?php echo $_GET['time'];?></td>
+        </tr>
+        <tr>
+            <th>Seat:</th>
+            <td><input type="text" id="selectedtext" name="seats" placeholder="Selected checkboxes"></td>
+        </tr>
+        <tr>
+            <th>Total Seat:</th>
+            <td><input type="text" id="count" name="totalseat" placeholder="Total Seats"></td>
+        </tr>
+        <input type="hidden" name="movie" value="<?php echo $_GET['movie'];?>">
+        <input type="hidden" name="show" value="<?php echo $_GET['time'];?>">
+    </table>
+</body>
 <?php 
 if (!isset($_SESSION['uname'])) {
   ?>
-<div class="col-lg-12">
-            <div class="form-group">
-                     <a data-toggle="modal" data-target="#trailer_modal" class="form-control btn btn-primary py-2"><font style="color:white;">Payment Now</a>
+<div class="col-lg-12"> 
+            <div class="form-group" >
+                     <a data-toggle="modal" data-target="#trailer_modal" class="form-control btn btn-primary py-2" style="margin-top:10px;margin-left:0px;margin-bottom:100px;"><font style="color:white;">Pay Now</a>
                   </div>
     </div>
-      <div class="modal fade" id="trailer_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <h3>You need to login</h3>
-      <a class="btn btn-primary btn-sm" href="login_form.php">Login</a>
-    </div>
-  </div>
-</div> 
+    <div class="modal fade" id="trailer_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #222; color: white; border-radius: 10px; padding: 5px; font-size: small;">
+            <h3 style="color: white; font-size:medium; text-align:center;margin-top:5px;">You need to login</h3>
+            <a class="btn btn-primary btn-sm" href="login_form.php" style="background-color: #6f42c1; color: white;">Login</a>
+        </div>
+        </div>
+         
   <?php
 }else{
 ?>
-   <div class="col-lg-12">
-            <div class="form-group">
-                    <input type="submit" value="Payment Now" name="submit" class="form-control btn btn-primary py-2">
-                  </div>
-    </div>
+   <div class="form-group">
+    <a href="payment_form.php" class="form-control btn btn-primary py-2" style="margin-top: 10px; margin-left: 0px; margin-bottom: 100px; color: white;">Pay Now</a>
+</div>
+
+
 
 
 <?php
@@ -818,7 +868,7 @@ if (!isset($_SESSION['uname'])) {
 
  if( name.value == "" )
  {
-  error = " <font color='red'>!Requrie Name.</font> ";
+  error = " <font color='red'>!Name Required.</font> ";
   document.getElementById( "nameerror" ).innerHTML = error;
   return false;
  }
