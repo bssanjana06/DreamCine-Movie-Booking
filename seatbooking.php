@@ -797,14 +797,14 @@
         </tr>
         <tr>
             <th>Seat:</th>
-            <td><input type="text" id="selectedtext" name="seats" placeholder="Selected checkboxes"></td>
+            <td><input type="text" id="selectedtext" name="seat[]" placeholder="Selected checkboxes"></td>
         </tr>
         <tr>
             <th>Total Seat:</th>
             <td><input type="text" id="count" name="totalseat" placeholder="Total Seats"></td>
         </tr>
-        <input type="hidden" name="movie" value="<?php echo $_GET['movie'];?>">
-        <input type="hidden" name="show" value="<?php echo $_GET['time'];?>">
+        <input type="hidden" name='movie' value="<?php echo $_GET['movie'];?>">
+        <input type="hidden" name='show' value="<?php echo $_GET['time'];?>">
     </table>
 </body>
 <?php 
@@ -826,13 +826,44 @@ if (!isset($_SESSION['uname'])) {
   <?php
 }else{
 ?>
-  <div id="error-message" style="color: red; margin-top: 10px;"></div>
-<form id="paymentForm" method="post" action="payment_form.php">
-  <!-- Your other form fields go here -->
+<div id="error-message" style="color: red; margin-top: 10px;"></div>
+<form id="paymentForm" method="post" action="payment.php">
+    <!-- Your form fields go here -->
+    <!-- For example, include your hidden input fields here -->
+
+    <div class="form-group">
+        <button type="submit" name="submit" class="form-control btn btn-primary py-2" style="margin-top: 10px; margin-left: 0px; margin-bottom: 100px; color: white;"onclick="return validateAndSubmit()">Pay Now</button>
+    </div>
 </form>
-<div class="form-group">
-  <button class="form-control btn btn-primary py-2" style="margin-top: 10px; margin-left: 0px; margin-bottom: 100px; color: white;" onclick="return validateAndSubmit()">Pay Now</button>
-</div>
+
+<script>
+    function validateAndSubmit() {
+    if (validateForm()) {
+        document.getElementById('paymentForm').submit();
+    }
+    return false;
+}
+
+function validateForm() {
+    var selectedSeats = document.getElementById("selectedtext").value;
+    var errorMessage = document.getElementById("error-message");
+
+    if (selectedSeats === "") {
+        errorMessage.innerHTML = "*Please select seats before proceeding to payment.";
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+
+
+<!-- <div class="col-lg-12">
+            <div class="form-group">
+                    <input type="submit" value="Payment Now" name="submit" class="form-control btn btn-primary py-2">
+                  </div>
+    </div> -->
 
 <?php
 }
@@ -861,28 +892,50 @@ if (!isset($_SESSION['uname'])) {
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
   function validateAndSubmit() {
     if (validateForm()) {
-      document.getElementById('paymentForm').submit();
+        document.getElementById('paymentForm').submit();
     }
-    return false; // This line ensures that the button click doesn't trigger the default behavior
-  }
+    return false;
+}
+// Disable the checkboxes for booked seats
+bookedSeats.forEach(function(seat) {
+    var checkbox = document.querySelector('input[name="seat[]"][value="' + seat + '"]');
+    if (checkbox) {
+        checkbox.disabled = true;
+        console.log("Disabled checkbox for seat:", seat);
+    } else {
+        console.warn("Checkbox not found for seat:", seat);
+    }
+});
 
-  function validateForm() {
+
+function validateForm() {
     var selectedSeats = document.getElementById("selectedtext").value;
     var errorMessage = document.getElementById("error-message");
 
     if (selectedSeats === "") {
-      errorMessage.innerHTML = "*Please select seats before proceeding to payment.";
-      return false;
+        errorMessage.innerHTML = "*Please select seats before proceeding to payment.";
+        return false;
     }
 
-    // You can add more validation logic if needed
+    return true;
+} -->
 
-    return true; // Proceed to payment if everything is fine
-  }
-</script>
+<!-- // function validate()
+// {
+//  var error="";
+//  var name = document.getElementById( "selectedtext" );
+
+//  if( name.value == "" )
+//  {
+//   error = " <font color='red'>!Select seat.</font> ";
+//   document.getElementById( "nameerror" ).innerHTML = error;
+//   return false;
+//  }
+// } -->
+<!-- </script> -->
 
 </body>
 </html>

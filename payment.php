@@ -29,7 +29,10 @@ if (!isset($_SESSION['uname'])) {
 
 
 .front {
-    margin: 5px 4px 45px 0;
+    /* margin: 0px 4px 45px 0; */
+    margin-left:-10px;
+    margin-right:50px;
+    margin-bottom:10px;
     background-color: #EDF979;
     color: #000000;
    
@@ -50,7 +53,7 @@ if (!isset($_SESSION['uname'])) {
     </div> <!-- End -->
     <div class="row">
         <div class="col-lg-6 mx-auto">
-            <div class="card ">
+            <div class="card" style="background-color:#444; color:white; border:white 50px;">
                 <div class="card-header">
                      <!-- End -->
                     <!-- Credit card form content -->
@@ -58,71 +61,76 @@ if (!isset($_SESSION['uname'])) {
                         <div class="row">
                             
                         <?php
+// Start the session
+// session_start();
+
+// Include the database connection file
 include("Database.php");
 
+// Initialize the price
 $price = 0;
+
+// Get the logged-in username from the session
 $username = $_SESSION['uname'];
 
+// Check if the form is submitted
 if (isset($_POST['submit'])) {
+    // Get the selected show, seats, and other details from the POST data
     $show = $_POST['show'];
-    $result = mysqli_query($conn, "SELECT u.username,u.email,u.mobile,u.city,t.theater FROM user u INNER JOIN theater_show t on u.username = '" . $username . "' WHERE t.show = '" . $show . "'");
-    $seats = $_POST["seat"];
+    $seats = $_POST['seat'];
+    $movie = $_POST['movie'];
+    $totalSeats = $_POST['totalseat'];
 
-    echo "Loop is executing<br>";
-
+    // Initialize a variable to store the last processed seat
+    $lastSeat = '';
+    echo "Show : $show<br>";
+    echo "Movie : $movie<br>";
+    // Loop through selected seats to calculate the total price
     foreach ($seats as $seat) {
-        echo "Processing seat: $seat<br>";
-
-        $seatCode = $seat[0];
-        echo "Seat Code: $seatCode<br>";
-
+        // Extract the seat code
+        $seatCode = strtoupper($seat);
+        
+        // Calculate the price for the seat (considering only the letter)
         $price += calculatePrice($seatCode);
-        echo "Price for $seatCode: " . calculatePrice($seatCode) . "<br>";
+
+        // Update the last processed seat
+        $lastSeat = "Seat : $seat";
     }
 
-    echo "Total Price: $price<br>";
+    // Display the last processed seat
+    echo "$lastSeat<br>";
 
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_array($result)) {
-            echo '<div class="col-lg-6">
-                Your Username: ' . $row['username'] . '<br>
-                Phone no.: ' . $row['mobile'] . '<br>
-                Movie Name: ' . $_POST['movie'] . '<br>
-                Seats: ' . implode(",", $_POST["seat"]) . ' <br>
-                Payment Date: ' . date("D-m-y ", strtotime('today')) . '
-            </div>
-            <div class="col-lg-6">
-                Email: ' . $row['email'] . '<br>
-                City: ' . $row['city'] . '<br>
-                Theater: ' . $row['theater'] . '<br>  
-                Total Seats: ' . $_POST['totalseat'] . ' <br>
-                Time: ' . $_POST['show'] . '<br>
-                Booking Date: ' . date("D-m-y ", strtotime('tomorrow')) . '
-            </div>';
-        }
-    }
+    // Display the total price
+    $price=$price-100;
+    
+
+    echo "Total Price : $price<br>";
+
+    // Display booking information
 }
 
+// Function to calculate the price based on the seat code (considering only the letter)
 function calculatePrice($seatCode)
 {
-    switch ($seatCode) {
-        case 'A':
-            return 300;
-        case 'B':
-        case 'C':
-        case 'D':
-        case 'E':
-            return 150;
-        default:
-            return 100;
-    }
+    // Define seat prices
+    $seatPrices = [
+        'A' => 300,
+        'B' => 150,
+        'C' => 150,
+        'D' => 150,
+        'E' => 150,
+    ];
+
+    // Extract only the letter from the seat code
+    $letter = preg_replace('/[^A-Z]/', '', $seatCode);
+
+    // Check if the letter exists in the array, otherwise, return the default price
+    return isset($seatPrices[$letter]) ? $seatPrices[$letter] : 100;
 }
 ?>
-<input type="hidden" id="movie" value="<?php echo htmlspecialchars($_POST['movie']); ?>">
-<input type="hidden" id="time" value="<?php echo htmlspecialchars($_POST['show']); ?>">
-<input type="hidden" id="seat" value="<?php echo htmlspecialchars(implode(",", $_POST["seat"])); ?>">
-<input type="hidden" id="totalseat" value="<?php echo htmlspecialchars($_POST['totalseat']); ?>">
-<input type="hidden" id="price" value="<?php echo htmlspecialchars($price); ?>">
+
+
+
 
                         <!-- credit card info-->
 <div id="credit-card" class="tab-pane fade show active pt-3" style="width:1000px;">
@@ -169,7 +177,7 @@ function calculatePrice($seatCode)
     <div class="col-lg-6">
         <div class="seatCharts-container">
             <div class="front" style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="text-align: left;">Amount Payable: </span>
+                <span style="text-align: left; width:100%;">Amount Payable: </span>
                 <span style="text-align: right;">Rs.<?php echo $price; ?>/-</span>
             </div>
         </div>
@@ -191,70 +199,98 @@ function calculatePrice($seatCode)
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-<script type="text/javascript">
-    
-    $(document).ready(function(){
-  $("#payment").click(function(){
-    var movie = $("#movie").val().trim();
-    var time = $("#time").val().trim();
-    var seat = $("#seat").val().trim();
-    var totalseat = $("#totalseat").val().trim();
-    var price = $("#price").val().trim();
-    var card_name = $("#card_name").val().trim();
-    var card_number = $("#card_number").val().trim();
-    var ex_date = $("#ex_date").val().trim();
-    var cvv = $("#cvv").val().trim();
-    
-    if(card_name == '')
-    {
-        error = " <font color='red'>!Enter Card Name.</font> ";
-        document.getElementById( "validatecardname" ).innerHTML = error;
-        return false;
-    }
-    if(card_number == '')
-    {
-        error = " <font color='red'>!Enter Card Number.</font> ";
-        document.getElementById( "validatecardnumber" ).innerHTML = error;
-        return false;
-    }
-    if(ex_date == '')
-    {
-        error = " <font color='red'>!Enter Expiry Date.</font> ";
-        document.getElementById( "validateexdate" ).innerHTML = error;
-        return false;
-    }
-    if(cvv == '')
-    {
-        error = " <font color='red'>!Enter CVV.</font> ";
-        document.getElementById( "validatecvv" ).innerHTML = error;
-        return false;
-    }
-    $.ajax({
-      url:'payment_form.php',
-      type:'post',
-      data:{
-            movie:movie,
-            time:time,
-            seat:seat,
-            totalseat:totalseat,
-            price:price,
-            card_name:card_name,
-            card_number:card_number,
-            ex_date:ex_date,
-            cvv:cvv,
-            },
-      success:function(response){
-          if(response == 1){
-                                    window.location = "tickes.php";
-                                }else{
-                                     error = " <font color='red'>!Invalid UserId.</font> ";
-                                     document.getElementById( "msg" ).innerHTML = error;
-                                      return false;
-                                }
-        $("#message").html(response);
-      }
+    <script type="text/javascript">
+    $(document).ready(function () {
+    $("#payment").click(function () {
+        var movie = $("#movie").val().trim();
+        var time = $("#time").val().trim();
+        var seat = $("#seat").val().trim();
+        var totalseat = $("#totalseat").val().trim();
+        var price = $("#price").val().trim();
+        var card_name = $("#card_name").val().trim();
+        var card_number = $("#card_number").val().trim();
+        var ex_date = $("#ex_date").val().trim();
+        var cvv = $("#cvv").val().trim();
+
+        $(".error-message").html("");
+
+        if (card_name == '') {
+            showError("validatecardname", "Enter Card Name.");
+            return false;
+        }
+        if (card_number == '') {
+            showError("validatecardnumber", "Enter Card Number.");
+            return false;
+        }
+        if (ex_date == '') {
+            showError("validateexdate", "Enter Expiry Date.");
+            return false;
+        }
+        if (cvv == '') {
+            showError("validatecvv", "Enter CVV.");
+            return false;
+        }
     });
-  });
+
+    function showError(elementId, errorMessage) {
+        error = " <font color='red'>" + errorMessage + "</font> ";
+        $("#" + elementId).html(error);
+    }
+
+    $("#payment").click(function () {
+        var movie = $("#movie").val();
+        var time = $("#time").val();
+        var seat = $("#seat").val();
+        var totalseat = $("#totalseat").val();
+        var price = $("#price").val();
+        var card_name = $("#card_name").val();
+        var card_number = $("#card_number").val();
+        var ex_date = $("#ex_date").val();
+        var cvv = $("#cvv").val();
+
+        $.ajax({
+            url: 'payment_form.php',
+            type: 'post',
+            data: {
+                movie: movie,
+                time: time,
+                seat: seat,
+                totalseat: totalseat,
+                price: price,
+                card_name: card_name,
+                card_number: card_number,
+                ex_date: ex_date,
+                cvv: cvv,
+            },
+            success: function (response) {
+                if (response == 1) {
+                    disableOrHideCheckboxes(); // Call the function to disable or hide checkboxes
+                    window.location = "tickes.php";
+                } else {
+                    error = " <font color='red'>!Error.</font> ";
+                    document.getElementById("msg").innerHTML = error;
+                    return false;
+                }
+                $("#message").html(response);
+            }
+        });
+    });
+
+    // function disableOrHideCheckboxes() {
+    //     // Get all checkboxes with the name "seat[]"
+    //     var checkboxes = document.querySelectorAll('input[name="seat[]"]');
+
+    //     // Iterate through checkboxes and disable or hide them
+    //     checkboxes.forEach(function (checkbox) {
+    //         // Uncomment one of the following lines based on your preference
+
+    //         // Disable checkboxes
+    //         // checkbox.disabled = true;
+
+    //         // Hide checkboxes
+    //         // checkbox.style.display = 'none';
+    //     });
+    // }
 });
 </script>
    </body>
