@@ -74,6 +74,7 @@ include("header.php");
           while($row = mysqli_fetch_array($result)) {
             $id = $row['id'];
         ?>
+        
     <div class="row feature design">
         <div class="col-lg-5"> <img src="admin/image/<?php echo $row['image']; ?>" class="resize-detail" style="width:100%; height:500px;" alt=""> </div>
 
@@ -107,39 +108,44 @@ include("header.php");
     <td>
         <a href="<?php echo $row['you_tube_link']; ?>?autoplay=1" target="_blank">View Trailer</a>
     </td>
-</tr>
-
-          
-          </tbody>
-            
+</tr>          
+          </tbody>         
           
         </table>
-        <h3 style="font-size:20px; margin-bottom:5px;">Show Timings</h3>
-        <?php 
-$time = $row['show'];
-$movie = $row['movie_name'];
-$set_time = explode(",", $time);
+       
+        <?php  if($row['action']== "running"){?>
+        <div class="tiem-link">
+          <h4>Time Slots:</h4><br>
+          <?php 
+            $time = $row['show'];
 
-$res = mysqli_query($conn, "SELECT * FROM theater_show");
+            $movie = $row['movie_name'];
+            $set_time = explode(",", $time);
+            $res = mysqli_query($conn,"SELECT * FROM theater_show");
 
-if (mysqli_num_rows($res) > 0) {
-    while ($row = mysqli_fetch_array($res)) {
-        if (in_array($row['show'], $set_time)) {
-            ?>
-            <div class="timings-box">
-                <a href="seatbooking.php?movie=<?php echo $movie; ?>&time=<?php echo $row['show']; ?>">
-                    <?php echo $row['show']; ?>
-                </a>
-            </div>
-            <?php
-        }
-    }
+        if (mysqli_num_rows($res) > 0) {
+          while($row = mysqli_fetch_array($res)) {
+
+            if(in_array($row['show'],$set_time)){
+
+              ?><a href="seatbooking.php?movie=<?php echo $movie; ?>&time=<?php echo $row['show']; ?>"><?php echo $row['show']; ?></a>&nbsp;&nbsp;
+              <?php
+             
+             }
+           }
+         }
+          ?>
+        
+       
+      </div>
+      <?php
 }
           }
         }
-?>
-</div>
-</div>
+      ?>
+      </div>
+      
+    </div>
     <div class="description">
       <h4 style="font-size:25px;">Description</h4>
       <?php

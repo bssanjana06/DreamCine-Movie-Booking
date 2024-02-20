@@ -826,12 +826,13 @@ if (!isset($_SESSION['uname'])) {
   <?php
 }else{
 ?>
-   <div class="form-group">
-    <a href="payment_form.php" class="form-control btn btn-primary py-2" style="margin-top: 10px; margin-left: 0px; margin-bottom: 100px; color: white;">Pay Now</a>
+  <div id="error-message" style="color: red; margin-top: 10px;"></div>
+<form id="paymentForm" method="post" action="payment_form.php">
+  <!-- Your other form fields go here -->
+</form>
+<div class="form-group">
+  <button class="form-control btn btn-primary py-2" style="margin-top: 10px; margin-left: 0px; margin-bottom: 100px; color: white;" onclick="return validateAndSubmit()">Pay Now</button>
 </div>
-
-
-
 
 <?php
 }
@@ -860,19 +861,28 @@ if (!isset($_SESSION['uname'])) {
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-<script type="text/javascript">
-     function validate()
-{
- var error="";
- var name = document.getElementById( "seat" );
+    <script type="text/javascript">
+  function validateAndSubmit() {
+    if (validateForm()) {
+      document.getElementById('paymentForm').submit();
+    }
+    return false; // This line ensures that the button click doesn't trigger the default behavior
+  }
 
- if( name.value == "" )
- {
-  error = " <font color='red'>!Name Required.</font> ";
-  document.getElementById( "nameerror" ).innerHTML = error;
-  return false;
- }
-}
+  function validateForm() {
+    var selectedSeats = document.getElementById("selectedtext").value;
+    var errorMessage = document.getElementById("error-message");
+
+    if (selectedSeats === "") {
+      errorMessage.innerHTML = "*Please select seats before proceeding to payment.";
+      return false;
+    }
+
+    // You can add more validation logic if needed
+
+    return true; // Proceed to payment if everything is fine
+  }
 </script>
+
 </body>
 </html>

@@ -134,11 +134,12 @@ if (!isset($_SESSION['uname'])) {
                                 }
                                }  
                                 ?>  
-                            <input type="hidden" id="movie" value="<?php echo $_POST['movie'];?>">
-                            <input type="hidden" id="time" value="<?php echo $_POST['show'];?>">
-                            <input type="hidden" id="seat" value="<?php echo implode(",", $_POST["seat"]);?>">
-                            <input type="hidden" id="totalseat" value="<?php echo $_POST['totalseat'];?>">
-                            <input type="hidden" id="price" value="<?php echo $price;?>">
+                            <input type="hidden" id="movie" value="<?php echo htmlspecialchars($_POST['movie']);?>">
+<input type="hidden" id="time" value="<?php echo htmlspecialchars($_POST['show']);?>">
+<input type="hidden" id="seat" value="<?php echo htmlspecialchars(implode(",", $_POST["seat"]));?>">
+<input type="hidden" id="totalseat" value="<?php echo htmlspecialchars($_POST['totalseat']);?>">
+<input type="hidden" id="price" value="<?php echo htmlspecialchars($price);?>">
+
                         </div>
                         <!-- credit card info-->
                         <div id="credit-card" class="tab-pane fade show active pt-3">

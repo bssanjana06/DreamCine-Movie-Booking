@@ -18,11 +18,11 @@ if($_POST['card_name'] != '' && $_POST['card_number'] != '' && $_POST['ex_date']
       	$uid=$row['id'];
       	}
       }
-      $custemer_id= mt_rand();
+      $customer_id= mt_rand();
       $payment = date("D-m-y ",strtotime('today'));
       $booking = date("D-m-y ",strtotime('tomorrow'));
       
-      $_SESSION['custemer_id'] = $custemer_id;
+      $_SESSION['customer_id'] = $customer_id;
 	$insert_record=mysqli_query($conn,"INSERT INTO customers (`uid`,`movie`,`show_time`,`seat`,`totalseat`,`price`,`payment_date`,`booking_date`,`card_name`,`card_number`,`ex_date`,`cvv`,`customer_id`)VALUES('".$uid."','".$movie."','".$time."','".$seat."','".$totalseat."','".$price."','".$payment."','".$booking."','".$card_name."','".$card_number."','".$ex_date."','".$cvv."','".$customer_id."')");
 
 	if(!$insert_record)
