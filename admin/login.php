@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Username and Password Validation</title>
+  <title>Admin Login</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <script src="js/jquery-3.5.1.min.js"></script>
   <style type="text/css">

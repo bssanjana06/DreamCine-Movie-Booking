@@ -125,59 +125,61 @@ function calculatePrice($seatCode)
 <input type="hidden" id="price" value="<?php echo htmlspecialchars($price); ?>">
 
                         <!-- credit card info-->
-                        <div id="credit-card" class="tab-pane fade show active pt-3">
-                            
-                                <div class="form-group"> <label for="username">
-                                        <h6>Card Owner</h6>
-                                    </label> <input type="text" id="card_name" name="card_name" placeholder="Card Owner Name" class="form-control"> 
-                                    <div id="validatecardname"></div>
-                                </div>
-                                <div class="form-group"> <label for="cardNumber">
-                                        <h6>Card number</h6>
-                                    </label>
-                                    <div class="input-group"> <input type="text" id="card_number" name="card_number" placeholder="Valid card number" class="form-control"> 
-                                     </div>
-                                     <div id="validatecardnumber"></div>
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col-sm-8">
-                                        <div class="form-group"> <label><span class="hidden-xs">
-                                                    <h6>Expiration Date</h6>
-                                                </span></label>
-                                            <div class="input-group"> <input type="date" id="ex_date" placeholder="MM" name="ex_date" class="form-control">
-                                            </div>
-                                            <div id="validateexdate"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                                                <h6>CVV </h6>
-                                            </label> <input type="number" id="cvv" class="form-control"> </div>
-                                            <div id="validatecvv"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-    <div class="seatCharts-container">
-        <div class="front" style="display: flex; justify-content: space-between;">
-            <span style="text-align: left;">&nbsp;&nbsp;&nbsp;Amount Payable: </span>
-            <span style="text-align: right;">Rs.<?php echo $price; ?>/-</span>
+<div id="credit-card" class="tab-pane fade show active pt-3" style="width:1000px;">
+    <div class="form-group">
+        <label for="username">
+            <h6>Card Owner</h6>
+        </label>
+        <input type="text" id="card_name" name="card_name" placeholder="Card Owner Name" class="form-control">
+        <div id="validatecardname"></div>
+    </div>
+    <div class="form-group">
+        <label for="cardNumber">
+            <h6>Card number</h6>
+        </label>
+        <div class="input-group">
+            <input type="text" id="card_number" name="card_number" placeholder="Valid card number" class="form-control">
+        </div>
+        <div id="validatecardnumber"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label>
+                    <span class="hidden-xs">
+                        <h6>Expiration Date</h6>
+                    </span>
+                </label>
+                <div class="input-group">
+                    <input type="date" id="ex_date" placeholder="MM" name="ex_date" class="form-control">
+                </div>
+                <div id="validateexdate"></div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group mb-4">
+                <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                    <h6>CVV </h6>
+                </label>
+                <input type="password" id="cvv" class="form-control">
+            </div>
+            <div id="validatecvv"></div>
         </div>
     </div>
-</div>
-
-                                <div id="msg"></div>
-                                <div class="card-footer"> <button type="submit" id="payment" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
-
-                                </div>
-                            
-                        </div>
-                    </div> 
-                </div>
+    <div class="col-lg-6">
+        <div class="seatCharts-container">
+            <div class="front" style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="text-align: left;">Amount Payable: </span>
+                <span style="text-align: right;">Rs.<?php echo $price; ?>/-</span>
             </div>
         </div>
     </div>
+    <div id="msg"></div>
+    <div class="card-footer">
+        <button type="submit" id="payment" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
+    </div>
 </div>
+
 <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
