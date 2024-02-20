@@ -39,13 +39,13 @@ if (!isset($_SESSION['uname'])) {
 
 </style>
 </head>
-<body>
+<body style="background-color:#222;">
 
     <div class="container py-5">
     <!-- For demo purpose -->
     <div class="row mb-4">
         <div class="col-lg-8 mx-auto text-center">
-            <h1 class="display-6">BOOKING SUMMARY</h1>
+            <h1 class="display-6" style="color:white;">PAY HERE</h1>
         </div>
     </div> <!-- End -->
     <div class="row">
@@ -57,90 +57,73 @@ if (!isset($_SESSION['uname'])) {
                     <div class="tab-content">
                         <div class="row">
                             
-                                <?php
+                        <?php
+include("Database.php");
 
-                                include("Database.php"); 
-                           
-                                $username= $_SESSION['uname'];
-                                
-                                
-                                if(isset($_POST['submit'])){
-                                    $show = $_POST['show'];
-                                $result = mysqli_query($conn,"SELECT u.username,u.email,u.mobile,u.city,t.theater FROM user u INNER JOIN theater_show t on u.username = '".$username."' WHERE t.show = '".$show."'");
-                                $seats1 = implode(",", $_POST["seat"]);
-                                $seats = explode(",", $seats1);
-                                $price= 0;
-                                for($i=1;$i<=12;$i++){
-                                    $I = "I".$i;
-                                    $H = "H".$i;
-                                    $G = "G".$i;
-                                    $F = "F".$i;
-                                    $E = "E".$i;
-                                    $D = "D".$i;
-                                    $C = "C".$i;
-                                    $B = "B".$i;
-                                    $A = "A".$i;
-                                    
-                                if(in_array($I,$seats)){
-                                    $price=$price+100;
-                                }
-                                if (in_array($H, $seats)){
-                                   $price=$price+100;   
-                                }
-                                if (in_array($G, $seats)){
-                                   $price=$price+100;   
-                                }
-                                if (in_array($F, $seats)){
-                                   $price=$price+150;   
-                                }
-                                if (in_array($E, $seats)){
-                                   $price=$price+150;   
-                                }
-                                if (in_array($D, $seats)){
-                                   $price=$price+150;   
-                                }
-                                if (in_array($C, $seats)){
-                                   $price=$price+150;   
-                                }
-                                if (in_array($B, $seats)){
-                                   $price=$price+150;   
-                                }
-                                if (in_array($A, $seats)){
-                                   $price=$price+300;   
-                                }
-                            }                              
-                           
-                           if (mysqli_num_rows($result) > 0) {
-                                        while($row = mysqli_fetch_array($result)) {
-                                       echo'<div class="col-lg-6">
-                                Your Username: '.$row['username'].'<br>
-                                Phone no.: '.$row['mobile'].'<br>
-                                Movie Name: '.$_POST['movie'].'<br>
-                                Seats: '.implode(",", $_POST["seat"]).' <br>
-                                Payment Date: '.date("D-m-y ",strtotime('today')).'
-                                </div>
-                            <div class="col-lg-6">
-                                
-                                Email: '.$row['email'].'<br>
-                                City: '.$row['city'].'<br>
-                                Theater: '.$row['theater'].'<br>  
-                                Total Seats: '.$_POST['totalseat'].' <br>
-                                Time: '.$_POST['show'].'<br>
-                                Booking Date: '.date("D-m-y ",strtotime('tomorrow')).'
-                            
-                            </div>' ;
-                                
-                                    }
-                                }
-                               }  
-                                ?>  
-                            <input type="hidden" id="movie" value="<?php echo htmlspecialchars($_POST['movie']);?>">
-<input type="hidden" id="time" value="<?php echo htmlspecialchars($_POST['show']);?>">
-<input type="hidden" id="seat" value="<?php echo htmlspecialchars(implode(",", $_POST["seat"]));?>">
-<input type="hidden" id="totalseat" value="<?php echo htmlspecialchars($_POST['totalseat']);?>">
-<input type="hidden" id="price" value="<?php echo htmlspecialchars($price);?>">
+$price = 0;
+$username = $_SESSION['uname'];
 
-                        </div>
+if (isset($_POST['submit'])) {
+    $show = $_POST['show'];
+    $result = mysqli_query($conn, "SELECT u.username,u.email,u.mobile,u.city,t.theater FROM user u INNER JOIN theater_show t on u.username = '" . $username . "' WHERE t.show = '" . $show . "'");
+    $seats = $_POST["seat"];
+
+    echo "Loop is executing<br>";
+
+    foreach ($seats as $seat) {
+        echo "Processing seat: $seat<br>";
+
+        $seatCode = $seat[0];
+        echo "Seat Code: $seatCode<br>";
+
+        $price += calculatePrice($seatCode);
+        echo "Price for $seatCode: " . calculatePrice($seatCode) . "<br>";
+    }
+
+    echo "Total Price: $price<br>";
+
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+            echo '<div class="col-lg-6">
+                Your Username: ' . $row['username'] . '<br>
+                Phone no.: ' . $row['mobile'] . '<br>
+                Movie Name: ' . $_POST['movie'] . '<br>
+                Seats: ' . implode(",", $_POST["seat"]) . ' <br>
+                Payment Date: ' . date("D-m-y ", strtotime('today')) . '
+            </div>
+            <div class="col-lg-6">
+                Email: ' . $row['email'] . '<br>
+                City: ' . $row['city'] . '<br>
+                Theater: ' . $row['theater'] . '<br>  
+                Total Seats: ' . $_POST['totalseat'] . ' <br>
+                Time: ' . $_POST['show'] . '<br>
+                Booking Date: ' . date("D-m-y ", strtotime('tomorrow')) . '
+            </div>';
+        }
+    }
+}
+
+function calculatePrice($seatCode)
+{
+    switch ($seatCode) {
+        case 'A':
+            return 300;
+        case 'B':
+        case 'C':
+        case 'D':
+        case 'E':
+            return 150;
+        default:
+            return 100;
+    }
+}
+?>
+<input type="hidden" id="movie" value="<?php echo htmlspecialchars($_POST['movie']); ?>">
+<input type="hidden" id="time" value="<?php echo htmlspecialchars($_POST['show']); ?>">
+<input type="hidden" id="seat" value="<?php echo htmlspecialchars(implode(",", $_POST["seat"])); ?>">
+<input type="hidden" id="totalseat" value="<?php echo htmlspecialchars($_POST['totalseat']); ?>">
+<input type="hidden" id="price" value="<?php echo htmlspecialchars($price); ?>">
+
                         <!-- credit card info-->
                         <div id="credit-card" class="tab-pane fade show active pt-3">
                             
@@ -175,14 +158,14 @@ if (!isset($_SESSION['uname'])) {
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                <div class="seatCharts-container">
-           
-                                             <div class="front">
-                                                <font text-align="left">&nbsp;&nbsp;&nbsp;Amount Payble: </font>
-                                                <font text-align="right">Rs.<?php echo $price;?>/-</font>
-                                            </div>
-                                </div>
-                            </div>
+    <div class="seatCharts-container">
+        <div class="front" style="display: flex; justify-content: space-between;">
+            <span style="text-align: left;">&nbsp;&nbsp;&nbsp;Amount Payable: </span>
+            <span style="text-align: right;">Rs.<?php echo $price; ?>/-</span>
+        </div>
+    </div>
+</div>
+
                                 <div id="msg"></div>
                                 <div class="card-footer"> <button type="submit" id="payment" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
 
@@ -222,25 +205,25 @@ if (!isset($_SESSION['uname'])) {
     
     if(card_name == '')
     {
-        error = " <font color='red'>!Invalid cvv.</font> ";
+        error = " <font color='red'>!Enter Card Name.</font> ";
         document.getElementById( "validatecardname" ).innerHTML = error;
         return false;
     }
     if(card_number == '')
     {
-        error = " <font color='red'>!Invalid cvv.</font> ";
+        error = " <font color='red'>!Enter Card Number.</font> ";
         document.getElementById( "validatecardnumber" ).innerHTML = error;
         return false;
     }
     if(ex_date == '')
     {
-        error = " <font color='red'>!Invalid cvv.</font> ";
+        error = " <font color='red'>!Enter Expiry Date.</font> ";
         document.getElementById( "validateexdate" ).innerHTML = error;
         return false;
     }
     if(cvv == '')
     {
-        error = " <font color='red'>!Invalid cvv.</font> ";
+        error = " <font color='red'>!Enter CVV.</font> ";
         document.getElementById( "validatecvv" ).innerHTML = error;
         return false;
     }
