@@ -101,7 +101,7 @@ if (isset($_POST['submit'])) {
     echo "$lastSeat<br>";
 
     // Display the total price
-    $price=$price-100;
+    // $price=$price-100;
     
 
     echo "Total Price : $price<br>";
@@ -128,6 +128,13 @@ function calculatePrice($seatCode)
     return isset($seatPrices[$letter]) ? $seatPrices[$letter] : 100;
 }
 ?>
+<input type="hidden" id="movie" value="<?php echo $_POST['movie'];?>">
+                            <input type="hidden" id="time" value="<?php echo $_POST['show'];?>">
+                            <input type="hidden" id="seat" value="<?php echo implode(",", $_POST["seat"]);?>">
+                            <input type="hidden" id="totalseat" value="<?php echo $_POST['totalseat'];?>">
+                            <input type="hidden" id="price" value="<?php echo $price;?>">
+                            <input type="hidden" id="movie" value="<?php echo htmlspecialchars($_POST['movie']);?>">
+
 
 
 
@@ -169,7 +176,7 @@ function calculatePrice($seatCode)
                 <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
                     <h6>CVV </h6>
                 </label>
-                <input type="password" id="cvv" class="form-control">
+                <input type="password" id="cvv" name="cvv" class="form-control">
             </div>
             <div id="validatecvv"></div>
         </div>
@@ -183,115 +190,69 @@ function calculatePrice($seatCode)
         </div>
     </div>
     <div id="msg"></div>
-    <div class="card-footer">
-        <button type="submit" id="payment" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
-    </div>
+<div class="card-footer">
+    <!-- Use an anchor tag instead of a button -->
+    <a href="ticket.php" id="payment" class="subscribe btn btn-primary btn-block shadow-sm" onclick="validateAndSubmit();"> Confirm Payment </a>
 </div>
 
 <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery.nicescroll.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-    <script type="text/javascript">
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery.nicescroll.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.countdown.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript">
     $(document).ready(function () {
-    $("#payment").click(function () {
-        var movie = $("#movie").val().trim();
-        var time = $("#time").val().trim();
-        var seat = $("#seat").val().trim();
-        var totalseat = $("#totalseat").val().trim();
-        var price = $("#price").val().trim();
-        var card_name = $("#card_name").val().trim();
-        var card_number = $("#card_number").val().trim();
-        var ex_date = $("#ex_date").val().trim();
-        var cvv = $("#cvv").val().trim();
+        $("#payment").click(function (event) {
+            event.preventDefault(); // Prevent the default anchor behavior
 
-        $(".error-message").html("");
+            var movie = $("#movie").val().trim();
+            var time = $("#time").val().trim();
+            var seat = $("#seat").val().trim();
+            var totalseat = $("#totalseat").val().trim();
+            var price = $("#price").val().trim();
+            var card_name = $("#card_name").val().trim();
+            var card_number = $("#card_number").val().trim();
+            var ex_date = $("#ex_date").val().trim();
+            var cvv = $("#cvv").val().trim();
 
-        if (card_name == '') {
-            showError("validatecardname", "Enter Card Name.");
-            return false;
-        }
-        if (card_number == '') {
-            showError("validatecardnumber", "Enter Card Number.");
-            return false;
-        }
-        if (ex_date == '') {
-            showError("validateexdate", "Enter Expiry Date.");
-            return false;
-        }
-        if (cvv == '') {
-            showError("validatecvv", "Enter CVV.");
-            return false;
-        }
-    });
+            $(".error-message").html("");
 
-    function showError(elementId, errorMessage) {
-        error = " <font color='red'>" + errorMessage + "</font> ";
-        $("#" + elementId).html(error);
-    }
-
-    $("#payment").click(function () {
-        var movie = $("#movie").val();
-        var time = $("#time").val();
-        var seat = $("#seat").val();
-        var totalseat = $("#totalseat").val();
-        var price = $("#price").val();
-        var card_name = $("#card_name").val();
-        var card_number = $("#card_number").val();
-        var ex_date = $("#ex_date").val();
-        var cvv = $("#cvv").val();
-
-        $.ajax({
-            url: 'payment_form.php',
-            type: 'post',
-            data: {
-                movie: movie,
-                time: time,
-                seat: seat,
-                totalseat: totalseat,
-                price: price,
-                card_name: card_name,
-                card_number: card_number,
-                ex_date: ex_date,
-                cvv: cvv,
-            },
-            success: function (response) {
-                if (response == 1) {
-                    disableOrHideCheckboxes(); // Call the function to disable or hide checkboxes
-                    window.location = "tickes.php";
-                } else {
-                    error = " <font color='red'>!Error.</font> ";
-                    document.getElementById("msg").innerHTML = error;
-                    return false;
-                }
-                $("#message").html(response);
+            if (card_name == '') {
+                showError("validatecardname", "Enter Card Name.");
+                return false;
             }
+            if (card_number == '') {
+                showError("validatecardnumber", "Enter Card Number.");
+                return false;
+            }
+            if (!/^\d{16}$/.test(card_number)) {
+            showError("validatecardnumber", "Card Number must be 16 digits.");
+            return false;
+        }
+            if (ex_date == '') {
+                showError("validateexdate", "Enter Expiry Date.");
+                return false;
+            }
+            if (cvv == '') {
+                showError("validatecvv", "Enter CVV.");
+                return false;
+            }
+
+            // Validation is successful, navigate to tickes.php
+            window.location.href = "ticket.php";
         });
+
+        function showError(elementId, errorMessage) {
+            error = " <font color='red'>" + errorMessage + "</font> ";
+            $("#" + elementId).html(error);
+        }
     });
-
-    // function disableOrHideCheckboxes() {
-    //     // Get all checkboxes with the name "seat[]"
-    //     var checkboxes = document.querySelectorAll('input[name="seat[]"]');
-
-    //     // Iterate through checkboxes and disable or hide them
-    //     checkboxes.forEach(function (checkbox) {
-    //         // Uncomment one of the following lines based on your preference
-
-    //         // Disable checkboxes
-    //         // checkbox.disabled = true;
-
-    //         // Hide checkboxes
-    //         // checkbox.style.display = 'none';
-    //     });
-    // }
-});
 </script>
-   </body>
+</body>
 </html>

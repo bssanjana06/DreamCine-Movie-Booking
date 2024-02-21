@@ -20,11 +20,11 @@ if (!isset($_SESSION['uname'])) {
 <body style="background-color:#222;">
 
  <div class="container py-5">
-    <!-- For demo purpose -->
+    
     <div class="row mb-4">
         <div class="col-lg-8 mx-auto text-center">
 
-            <h1 class="display-6" style=";color:white;">BOOKING SUMMARY</h1>
+            <h1 class="display-6" style="color:white;">BOOKING SUMMARY</h1>
         </div>
     </div> <!-- End -->
     <div class="row">
@@ -77,11 +77,13 @@ if (!isset($_SESSION['uname'])) {
 </div>
 
 <div style="margin-top: 20px; padding: 10px; border: 1px solid #ccc;">
-    <div><strong>Seats:</strong> <?php echo $row['seat'];?></div>
+<div><strong>Seats:</strong> <?php echo implode(', ', array_unique(explode(',', $row['seat']))); ?></div>
+
     <div><strong>Total Seats:</strong> <?php echo $row['totalseat'];?></div>
 </div>
 
                 </div>
+                <a href="download_summary.php" class="btn btn-primary">Download Summary</a>
             </div>
         </div>
     </div>
